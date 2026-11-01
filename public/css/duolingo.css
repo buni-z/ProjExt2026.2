@@ -1,0 +1,1041 @@
+/* 
+  BOMBANANA! • REA DESIGN SYSTEM
+  Estética lúdica, energética e vibrante para crianças de 10 anos
+*/
+
+:root {
+  --banana-yellow: #FFD000;
+  --banana-yellow-glow: #FFE135;
+  --banana-dark: #D89B00;
+  --banana-light: #FFF8D6;
+  
+  --jungle-green: #22C55E;
+  --jungle-green-shadow: #15803D;
+  --jungle-green-light: #DCFCE7;
+  
+  --bomb-charcoal: #2D3436;
+  --bomb-orange: #FF5722;
+  --bomb-orange-shadow: #C83700;
+  --bomb-red: #EF4444;
+  --bomb-red-shadow: #B91C1C;
+  --bomb-red-light: #FEE2E2;
+
+  --sky-cyan: #00D2D3;
+  --sky-cyan-shadow: #009E9F;
+  --sky-cyan-light: #E0F7F8;
+
+  --squad-purple: #6C5CE7;
+  --squad-purple-shadow: #4834D4;
+  --squad-purple-light: #EDE9FE;
+
+  --jungle-bg: #F6F8EC;
+  --card-bg: #FFFFFF;
+  --card-border: #E8E5D8;
+  --text-dark: #2A2438;
+  --text-muted: #6B7280;
+
+  --font-family: 'Fredoka', -apple-system, BlinkMacSystemFont, "Comic Sans MS", cursive, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--jungle-bg);
+  background-image: radial-gradient(#E2E8CE 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Canvas para Partículas e Confetes */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Layout Principal */
+.app-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* SIDEBAR ESQUERDA */
+.sidebar {
+  width: 260px;
+  border-right: 3px solid var(--card-border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 18px 12px;
+  border-bottom: 2px dashed var(--card-border);
+}
+
+.brand-mascot-icon {
+  animation: gentleBounce 2.5s infinite ease-in-out;
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--jungle-green-shadow);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+.badge.squad {
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--bomb-orange);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: 2px;
+  box-shadow: 0 2px 0 var(--bomb-orange-shadow);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.nav-item:hover {
+  background: var(--banana-light);
+  color: var(--banana-dark);
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: var(--banana-yellow);
+  color: var(--bomb-charcoal);
+  border-color: var(--banana-dark);
+  box-shadow: 0 4px 0 var(--banana-dark);
+}
+
+.nav-item.refill-nav {
+  background: var(--bomb-red-light);
+  color: var(--bomb-red);
+  margin-top: 10px;
+  border: 2px dashed #FCA5A5;
+}
+
+.nav-item.refill-nav:hover {
+  background: #FEE2E2;
+  transform: scale(1.02);
+}
+
+.nav-icon {
+  font-size: 24px;
+  display: inline-block;
+}
+
+/* Card do Mascote no Rodapé da Sidebar */
+.sidebar-mascot-card {
+  margin-top: auto;
+  background: var(--sky-cyan-light);
+  border: 2px solid #A5F3FC;
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.mascot-speech {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0E7490;
+  line-height: 1.3;
+}
+
+.mascot-avatar-small {
+  font-size: 28px;
+  animation: wiggle 2s infinite ease-in-out;
+}
+
+/* ÁREA CENTRAL */
+.main-content {
+  flex: 1;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+}
+
+/* SIDEBAR DIREITA DE STATUS */
+.right-sidebar {
+  width: 330px;
+  padding: 24px 20px;
+  border-left: 3px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: #ffffff;
+  overflow-y: auto;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.02);
+}
+
+/* Status Header Chips (Pavio e Corações) */
+.stats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 10px;
+  background: #FAF8F2;
+  border-radius: 20px;
+  border: 2px solid var(--card-border);
+}
+
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 14px;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.stat-chip:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.stat-chip .chip-icon {
+  font-size: 20px;
+}
+
+.stat-chip.streak { 
+  color: var(--bomb-orange); 
+}
+
+.stat-chip.gems { 
+  color: var(--banana-dark); 
+}
+
+.stat-chip.hearts { 
+  color: var(--bomb-red); 
+}
+
+.stat-chip .chip-unit {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* Cartão da Unidade (Jungle Unit) */
+.unit-card.jungle-unit {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border-radius: 24px;
+  padding: 24px 28px;
+  color: #ffffff;
+  margin-bottom: 36px;
+  position: relative;
+  border: 3px solid #047857;
+  box-shadow: 0 8px 0 #065F46, 0 12px 24px rgba(16, 185, 129, 0.25);
+  overflow: hidden;
+}
+
+.unit-sparkles {
+  font-size: 20px;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.unit-card h3 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #A7F3D0;
+  font-weight: 900;
+}
+
+.unit-card h2 {
+  font-size: 23px;
+  font-weight: 900;
+  margin: 4px 0 8px 0;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.1);
+}
+
+.unit-desc {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #ECFDF5;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.unit-card .guide-btn {
+  background: var(--banana-yellow);
+  border: 2px solid var(--banana-dark);
+  color: var(--bomb-charcoal);
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--banana-dark);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.unit-card .guide-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--banana-dark);
+}
+
+/* TRILHA DA SELVA (JUNGLE SNAKE PATH) */
+.path-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.path-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.step-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-top: 8px;
+  background: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 2px solid var(--card-border);
+  box-shadow: 0 2px 0 var(--card-border);
+}
+
+.node-btn {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 3px solid #2B2118;
+  font-size: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.node-btn.banana-glow {
+  background: linear-gradient(145deg, #FFE135, #FFD000);
+  box-shadow: 0 8px 0 var(--banana-dark), 0 0 20px rgba(255, 208, 0, 0.4);
+}
+
+.node-btn.orange {
+  background: linear-gradient(145deg, #FF7043, #FF5722);
+  box-shadow: 0 8px 0 var(--bomb-orange-shadow);
+}
+
+.node-btn.green {
+  background: linear-gradient(145deg, #4ADE80, #22C55E);
+  box-shadow: 0 8px 0 var(--jungle-green-shadow);
+}
+
+.node-btn.blue {
+  background: linear-gradient(145deg, #38BDF8, #0284C7);
+  box-shadow: 0 8px 0 #0369A1;
+}
+
+.node-btn.purple {
+  background: linear-gradient(145deg, #A78BFA, #7C3AED);
+  box-shadow: 0 8px 0 #6D28D9;
+}
+
+.node-btn.yellow-chest {
+  background: linear-gradient(145deg, #FDE047, #EAB308);
+  box-shadow: 0 8px 0 #CA8A04;
+}
+
+.node-btn.locked {
+  background: #E5E7EB;
+  border-color: #9CA3AF;
+  box-shadow: 0 8px 0 #9CA3AF;
+  color: #9CA3AF;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.node-btn:active:not(.locked) {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 var(--banana-dark);
+}
+
+.node-popup {
+  position: absolute;
+  top: -50px;
+  background: #ffffff;
+  border: 3px solid var(--banana-dark);
+  padding: 7px 16px;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--bomb-charcoal);
+  box-shadow: 0 4px 0 var(--banana-dark);
+  animation: jungleBounce 1.5s infinite;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.node-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--banana-dark);
+}
+
+/* CAIXAS DE CONTEÚDO (Cards) */
+.card-box {
+  border: 3px solid var(--card-border);
+  border-radius: 22px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 6px 0 var(--card-border);
+}
+
+.card-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 900;
+  font-size: 17px;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.highlight-tag {
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--jungle-green-light);
+  color: var(--jungle-green-shadow);
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 2px solid #86EFAC;
+}
+
+/* CABEÇALHOS DAS PÁGINAS ALTERNATIVAS */
+.page-header-box {
+  text-align: center;
+  margin-bottom: 24px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 24px;
+  border: 3px solid var(--card-border);
+  box-shadow: 0 6px 0 var(--card-border);
+}
+
+.header-icon-pop {
+  font-size: 50px;
+  margin-bottom: 8px;
+  animation: wiggle 2.5s infinite ease-in-out;
+}
+
+.page-header-box h2 {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+.page-header-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* ITENS DE MISSÃO DIÁRIA */
+.quest-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.quest-icon {
+  font-size: 26px;
+}
+
+.quest-details {
+  flex: 1;
+}
+
+.quest-title {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.progress-bar-container {
+  height: 14px;
+  background: #E5E7EB;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #D1D5DB;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FACC15, #EAB308);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+/* BANNER DE LIGA NA SIDEBAR */
+.league-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.league-trophy-badge {
+  font-size: 36px;
+  background: var(--banana-light);
+  border: 2px solid var(--banana-dark);
+  border-radius: 16px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.league-tier-title {
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--banana-dark);
+}
+
+.league-tier-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+/* CAIXA DE PICOLÉ CONGELADO (FREEZE) */
+.freeze-box {
+  background: #ECFEFF;
+  border-color: #A5F3FC;
+  box-shadow: 0 4px 0 #A5F3FC;
+}
+
+.freeze-flex {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.freeze-icon {
+  font-size: 28px;
+}
+
+.freeze-text {
+  font-size: 13px;
+  color: #0E7490;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* MODAL DE LIÇÃO BOMBANANA (FULLSCREEN VIDEOGAME) */
+.lesson-modal {
+  position: fixed;
+  inset: 0;
+  background: #FAF8F2;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+}
+
+.lesson-modal.active {
+  display: flex;
+}
+
+.lesson-header {
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.close-btn {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 0 3px 0 var(--card-border);
+  transition: transform 0.1s;
+}
+
+.close-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--card-border);
+}
+
+/* Barra de Pavio de Bomba */
+.fuse-progress-wrap {
+  flex: 1;
+  height: 20px;
+  background: #E5E7EB;
+  border-radius: 14px;
+  border: 3px solid #D1D5DB;
+  overflow: visible;
+  position: relative;
+}
+
+.fuse-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F97316, #EF4444);
+  width: 0%;
+  border-radius: 10px;
+  transition: width 0.35s ease;
+  position: relative;
+}
+
+.fuse-spark {
+  position: absolute;
+  right: -12px;
+  top: -10px;
+  font-size: 22px;
+  animation: sparkCrackle 0.3s infinite alternate;
+  filter: drop-shadow(0 0 6px #F59E0B);
+}
+
+.lesson-hearts {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--bomb-red);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 2px solid #FCA5A5;
+  box-shadow: 0 3px 0 #FCA5A5;
+  cursor: pointer;
+}
+
+.heart-pulse {
+  animation: pulse 1s infinite;
+}
+
+/* CORPO DA PERGUNTA */
+.lesson-body {
+  flex: 1;
+  max-width: 660px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.monkey-mission-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.monkey-speaker {
+  background: #ffffff;
+  border: 3px solid var(--banana-dark);
+  border-radius: 24px;
+  padding: 6px;
+  box-shadow: 0 4px 0 var(--banana-dark);
+  flex-shrink: 0;
+  animation: gentleBounce 3s infinite ease-in-out;
+}
+
+.monkey-speech-bubble {
+  background: #ffffff;
+  border: 3px solid var(--card-border);
+  border-radius: 22px;
+  padding: 16px 20px;
+  position: relative;
+  box-shadow: 0 6px 0 var(--card-border);
+  flex: 1;
+}
+
+.monkey-speech-bubble::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 24px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 12px solid var(--card-border);
+}
+
+.mission-tag {
+  font-size: 11px;
+  font-weight: 900;
+  background: var(--sky-cyan);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.question-prompt {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+/* CARTÕES DE OPÇÕES ESTILO VIDEOGAME */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.option-card {
+  border: 3px solid var(--card-border);
+  border-radius: 20px;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 0 var(--card-border);
+  transition: all 0.15s ease;
+  line-height: 1.3;
+}
+
+.option-card:hover {
+  background: #FFFDF5;
+  border-color: var(--banana-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--banana-dark);
+}
+
+.option-card.selected {
+  border-color: var(--banana-dark);
+  background: var(--banana-light);
+  color: var(--bomb-charcoal);
+  box-shadow: 0 6px 0 var(--banana-dark);
+}
+
+.option-key {
+  background: var(--banana-yellow);
+  border: 2px solid var(--banana-dark);
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--bomb-charcoal);
+  box-shadow: 0 2px 0 var(--banana-dark);
+  flex-shrink: 0;
+}
+
+/* RODAPÉ DE AÇÃO E FEEDBACK */
+.lesson-footer {
+  border-top: 3px solid var(--card-border);
+  padding: 24px;
+  background: #ffffff;
+  transition: background 0.25s;
+}
+
+.lesson-footer.correct {
+  background: var(--jungle-green-light);
+  border-color: #86EFAC;
+}
+
+.lesson-footer.wrong {
+  background: var(--bomb-red-light);
+  border-color: #FCA5A5;
+}
+
+.footer-content {
+  max-width: 660px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.feedback-msg {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.feedback-icon {
+  font-size: 40px;
+  animation: wiggle 0.6s ease;
+}
+
+.feedback-title {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.feedback-title.correct { color: #15803D; }
+.feedback-title.wrong { color: #B91C1C; }
+
+.feedback-sub {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* BOTÕES 3D ESTILO BOMBANANA */
+.btn-duo {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 16px 32px;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.1s;
+  flex-shrink: 0;
+}
+
+.btn-duo.green {
+  background: var(--jungle-green);
+  border-color: var(--jungle-green-shadow);
+  color: #ffffff;
+  box-shadow: 0 6px 0 var(--jungle-green-shadow);
+}
+
+.btn-duo.green:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--jungle-green-shadow);
+}
+
+.btn-duo.red {
+  background: var(--bomb-orange);
+  border-color: var(--bomb-orange-shadow);
+  color: #ffffff;
+  box-shadow: 0 6px 0 var(--bomb-orange-shadow);
+}
+
+.btn-duo.red:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--bomb-orange-shadow);
+}
+
+.btn-duo.blue {
+  background: var(--sky-cyan);
+  border-color: var(--sky-cyan-shadow);
+  color: #ffffff;
+  box-shadow: 0 6px 0 var(--sky-cyan-shadow);
+}
+
+.btn-duo.blue:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--sky-cyan-shadow);
+}
+
+.btn-duo.disabled {
+  background: #E5E7EB;
+  border-color: #D1D5DB;
+  color: #9CA3AF;
+  box-shadow: 0 6px 0 #D1D5DB;
+  cursor: not-allowed;
+}
+
+/* PLACAR DA LIGA (Cohorts de 30) */
+.league-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  border: 2px solid transparent;
+  background: #FAF8F2;
+}
+
+.league-row.current-user {
+  background: var(--banana-light);
+  border-color: var(--banana-dark);
+  box-shadow: 0 3px 0 var(--banana-dark);
+}
+
+.league-row.promoted {
+  background: var(--jungle-green-light);
+  border-color: #86EFAC;
+}
+
+.league-rank {
+  width: 40px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-muted);
+}
+
+.league-avatar {
+  font-size: 28px;
+  margin-right: 12px;
+}
+
+.league-name {
+  flex: 1;
+  font-size: 16px;
+}
+
+.league-xp {
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--bomb-orange);
+  background: #ffffff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--card-border);
+}
+
+.zone-divider {
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.zone-divider.promo {
+  background: var(--jungle-green-light);
+  color: #15803D;
+  border: 2px dashed #86EFAC;
+}
+
+/* Telas Alternativas (Tabs) */
+.tab-page {
+  display: none;
+}
+
+.tab-page.active {
+  display: block;
+}
+
+/* ANIMAÇÕES LÚDICAS */
+@keyframes jungleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes sparkCrackle {
+  0% { transform: scale(0.9) rotate(-10deg); opacity: 0.8; }
+  100% { transform: scale(1.25) rotate(15deg); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 900px) {
+  .right-sidebar { display: none; }
+  .sidebar { width: 84px; padding: 16px 8px; }
+  .brand-text-wrap, .nav-item span.text, .sidebar-mascot-card { display: none; }
+  .nav-item { justify-content: center; padding: 14px; }
+}

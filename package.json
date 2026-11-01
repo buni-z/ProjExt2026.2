@@ -1,0 +1,25 @@
+{
+  "name": "rea",
+  "version": "1.0.0",
+  "description": "Sistema de Aprendizagem com Gamificação inspirada na arquitetura do Duolingo",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test tests/gamification.test.js",
+    "demo": "node examples/interactive-demo.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "gamification",
+    "duolingo",
+    "spaced-repetition",
+    "streak",
+    "leagues",
+    "rea"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
